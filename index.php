@@ -1,6 +1,5 @@
 <?php
-// index.php
-session_start(); // Start session to check user login status
+session_start();
 ?>
 
 <!DOCTYPE html>
