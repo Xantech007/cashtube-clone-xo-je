@@ -13,7 +13,7 @@ session_start(); // Start session to check user login status
     <meta name="author" content="Task Tube">
     <title>Task Tube - Earn Money Watching Ads</title>
     <!-- OneSignal Web SDK -->
-    <!--////remove/////<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script src="js/onesignal-init.js" defer></script>
     <!-- End OneSignal Web SDK -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
