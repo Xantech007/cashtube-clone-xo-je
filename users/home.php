@@ -969,20 +969,15 @@ try {
 
             // Play button to initiate playback
             playButton.addEventListener('click', function() {
-                const playPromise = videoPlayer.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function(error) {
-                        if (error.name !== 'AbortError') {
-                            console.error('Play error:', error);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Playback Error',
-                                text: 'Failed to play video: ' + error.message,
-                            });
-                            playButton.style.display = 'block';
-                        }
+                videoPlayer.play().catch(function(error) {
+                    console.error('Play error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Playback Error',
+                        text: 'Failed to play video: ' + error.message,
                     });
-                }
+                    playButton.style.display = 'block';
+                });
             });
         }
 
@@ -1000,35 +995,23 @@ try {
                         videoPlayer.setAttribute('data-reward', data.reward);
                         document.getElementById('video-reward').innerHTML = `Earn <span>$${parseFloat(data.reward).toFixed(2)}</span> by watching <span>${data.title}</span>. The more videos you watch, the more your <span>crypto balance</span> increases`;
                         document.getElementById('no-videos-message')?.remove();
-                        
+                        videoPlayer.load();
                         accumulatedReward = 0;
                         initialBalance = parseFloat(document.getElementById('balance').textContent);
                         if (interval !== null) {
                             clearInterval(interval);
                             interval = null;
                         }
-
-                        // Reload media source
-                        videoPlayer.load();
-
-                        // Safely handle playback once ready
-                        videoPlayer.addEventListener('canplay', function onCanPlay() {
-                            videoPlayer.removeEventListener('canplay', onCanPlay);
-                            videoPlayer.muted = true;
-                            
-                            const playPromise = videoPlayer.play();
-                            if (playPromise !== undefined) {
-                                playPromise.then(() => {
-                                    playButton.style.display = 'none';
-                                }).catch(function(error) {
-                                    if (error.name !== 'AbortError') {
-                                        console.warn('Autoplay prevented:', error);
-                                        playButton.style.display = 'block';
-                                    }
-                                });
-                            }
-                        }, { once: true });
-
+                        // Autoplay the video
+                        videoPlayer.play().catch(function(error) {
+                            console.error('Autoplay error:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Autoplay Error',
+                                text: 'Failed to autoplay next video: ' + error.message,
+                            });
+                            playButton.style.display = 'block';
+                        });
                     } else {
                         const videoSection = document.querySelector('.video-section');
                         videoPlayer?.remove();
@@ -1109,8 +1092,8 @@ try {
             var b1 = Math.round(istep * c0_0[2] + step * c0_1[2]);
             var color1 = `rgb(${r1},${g1},${b1})`;
             var r2 = Math.round(istep * c1_0[0] + step * c1_1[0]);
-            var g2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
-            var b2 = Math.round(istep * c1_0[3] + step * c1_1[3]);
+            var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
+            var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
             var color2 = `rgb(${r2},${g2},${b2})`;
             gradientElement.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
             step += gradientSpeed;
