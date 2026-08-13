@@ -61,7 +61,7 @@ try {
         $channel = htmlspecialchars($region_settings['channel']);
         $account_upgrade = $region_settings['account_upgrade'] ?? 0; // Default to 0 if not set
     } else {
-        // Fallback values if no region settings are found
+        // Fallback values if no region settings are found.
         $section_header = 'Withdraw Funds';
         $ch_name = 'Bank Name';
         $ch_value = 'Bank Account';
@@ -1002,23 +1002,16 @@ try {
                             clearInterval(interval);
                             interval = null;
                         }
-                        
-                        // --- FIX STARTS HERE ---
-                        // Attempt autoplay
+                        // Autoplay the video
                         videoPlayer.play().catch(function(error) {
-                            console.warn('Unmuted autoplay blocked, attempting muted autoplay:', error);
-                            
-                            // Fallback: Mute the video and attempt to play again
-                            videoPlayer.muted = true;
-                            videoPlayer.play().catch(function(mutedError) {
-                                console.error('Autoplay fully blocked by browser policy/power saver:', mutedError);
-                                
-                                // Show the play button so the user can manually initiate playback
-                                playButton.style.display = 'block';
+                            console.error('Autoplay error:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Autoplay Error',
+                                text: 'Failed to autoplay next video: ' + error.message,
                             });
+                            playButton.style.display = 'block';
                         });
-                        // --- FIX ENDS HERE ---
-        
                     } else {
                         const videoSection = document.querySelector('.video-section');
                         videoPlayer?.remove();
