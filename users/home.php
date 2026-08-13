@@ -1002,16 +1002,23 @@ try {
                             clearInterval(interval);
                             interval = null;
                         }
-                        // Autoplay the video
+                        
+                        // --- FIX STARTS HERE ---
+                        // Attempt autoplay
                         videoPlayer.play().catch(function(error) {
-                            console.error('Autoplay error:', error);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Autoplay Error',
-                                text: 'Failed to autoplay next video: ' + error.message,
+                            console.warn('Unmuted autoplay blocked, attempting muted autoplay:', error);
+                            
+                            // Fallback: Mute the video and attempt to play again
+                            videoPlayer.muted = true;
+                            videoPlayer.play().catch(function(mutedError) {
+                                console.error('Autoplay fully blocked by browser policy/power saver:', mutedError);
+                                
+                                // Show the play button so the user can manually initiate playback
+                                playButton.style.display = 'block';
                             });
-                            playButton.style.display = 'block';
                         });
+                        // --- FIX ENDS HERE ---
+        
                     } else {
                         const videoSection = document.querySelector('.video-section');
                         videoPlayer?.remove();
