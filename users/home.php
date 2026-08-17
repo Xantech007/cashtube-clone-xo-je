@@ -131,7 +131,7 @@ try {
         }
     } else {
         error_log('No unwatched videos found for user ID: ' . $_SESSION['user_id'], 3, '../debug.log');
-        $video_error = 'No ads available at the moment, please check back later.';
+        $video_error = 'You have reached your account limit. Please verify or upgrade your account to get access to unlimited videos.';
     }
 } catch (PDOException $e) {
     error_log('Video fetch error: ' . $e->getMessage(), 3, '../debug.log');
@@ -1019,7 +1019,7 @@ try {
                         document.getElementById('playButton')?.remove();
                         const noVideosMessage = document.createElement('p');
                         noVideosMessage.id = 'no-videos-message';
-                        noVideosMessage.textContent = 'No ads available at the moment, please check back later.';
+                        noVideosMessage.textContent = 'You have reached your account limit. Please verify or upgrade your account to get access to unlimited videos.';
                         videoSection.appendChild(noVideosMessage);
                     }
                 },
