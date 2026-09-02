@@ -21,7 +21,7 @@
         <h3>Get the TaskTube App!</h3>
         <p>Enjoy a faster, smoother experience and start earning directly from your Android device.</p>
         <div class="download-modal-actions">
-            <a href="https://raw.githubusercontent.com/Xantech007/cashtube-clone-xo-je/main/android-download/TaskTube.apk" class="btn-download" id="confirm-download">Download App</a>
+            <a href="https://raw.githubusercontent.com/Xantech007/cashtube-clone-xo-je/main/TaskTube.apk" class="btn-download" id="confirm-download">Download App</a>
             <button type="button" class="btn-close-modal" id="close-download-modal">Later</button>
         </div>
     </div>
