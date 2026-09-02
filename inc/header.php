@@ -9,9 +9,15 @@
                 <img src="img/palmpay.webp" alt="Task Tube Logo">
             </a>
         </div>
-        <button id="hamburger-menu" data-toggle="ham-navigation" class="hamburger-menu-button">
-            <span></span>
-        </button>
+        <div class="header-actions">
+            <!-- Header App Download Icon -->
+            <a href="#" id="header-download-btn" class="header-download-icon" title="Download App">
+                <i class="fas fa-download"></i>
+            </a>
+            <button id="hamburger-menu" data-toggle="ham-navigation" class="hamburger-menu-button">
+                <span></span>
+            </button>
+        </div>
     </div>
 </header>
 
@@ -36,6 +42,8 @@
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
     header {
@@ -66,6 +74,31 @@
     .logo a {
         display: inline-block;
         text-decoration: none;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-download-icon {
+        width: 40px;
+        height: 40px;
+        background: #f0ebff;
+        color: #6e44ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .header-download-icon:hover {
+        background: #6e44ff;
+        color: #fff;
     }
 
     .hamburger-menu-button {
@@ -264,11 +297,12 @@
         $('#hamburger-menu').click();
     });
 
-    // App Download Popup Logic (Shows only if not shown before)
+    // App Download Popup Logic (Shows automatically if not shown before, and via header icon)
     document.addEventListener("DOMContentLoaded", function() {
         const modal = document.getElementById('app-download-modal');
         const closeBtn = document.getElementById('close-download-modal');
         const confirmBtn = document.getElementById('confirm-download');
+        const headerDownloadBtn = document.getElementById('header-download-btn');
 
         // Check if the prompt has been shown before in localStorage
         if (!localStorage.getItem('tasktube_app_prompt_shown')) {
@@ -278,9 +312,15 @@
             }, 2000);
         }
 
+        // Open modal explicitly when header download icon is clicked
+        headerDownloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('show-modal');
+        });
+
         function dismissModal() {
             modal.classList.remove('show-modal');
-            // Save to localStorage so it won't pop up again
+            // Save to localStorage so it won't auto-pop up again
             localStorage.setItem('tasktube_app_prompt_shown', 'true');
         }
 
@@ -289,9 +329,7 @@
         
         // Also close if user clicks outside the modal content box
         modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                dismissModal();
-            }
+            e.target === modal && dismissModal();
         });
     });
 
