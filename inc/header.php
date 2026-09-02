@@ -15,6 +15,18 @@
     </div>
 </header>
 
+<!-- App Download Popup Modal -->
+<div id="app-download-modal" class="download-modal-overlay">
+    <div class="download-modal-content">
+        <h3>Get the TaskTube App!</h3>
+        <p>Enjoy a faster, smoother experience and start earning directly from your Android device.</p>
+        <div class="download-modal-actions">
+            <a href="https://raw.githubusercontent.com/Xantech007/cashtube-clone-xo-je/main/android-download/TaskTube.apk" class="btn-download" id="confirm-download">Download App</a>
+            <button type="button" class="btn-close-modal" id="close-download-modal">Later</button>
+        </div>
+    </div>
+</div>
+
 <!-- Notification Popup -->
 <div id="notification-container">
     <div id="notification-popup" class="notification-popup">
@@ -107,6 +119,91 @@
         transform: translateY(0) rotate(-45deg);
     }
 
+    /* App Download Modal Styling */
+    .download-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .download-modal-overlay.show-modal {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .download-modal-content {
+        background: #fff;
+        padding: 30px 25px;
+        border-radius: 16px;
+        max-width: 380px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .download-modal-overlay.show-modal .download-modal-content {
+        transform: scale(1);
+    }
+
+    .download-modal-content h3 {
+        margin-bottom: 12px;
+        color: #333;
+        font-size: 22px;
+    }
+
+    .download-modal-content p {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .download-modal-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-download {
+        background: #28a745;
+        color: #fff;
+        padding: 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+
+    .btn-download:hover {
+        background: #218838;
+    }
+
+    .btn-close-modal {
+        background: transparent;
+        border: none;
+        color: #888;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .btn-close-modal:hover {
+        color: #333;
+    }
+
     .notification-popup {
         position: fixed;
         top: 20px;
@@ -167,6 +264,37 @@
         $('#hamburger-menu').click();
     });
 
+    // App Download Popup Logic (Shows only if not shown before)
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById('app-download-modal');
+        const closeBtn = document.getElementById('close-download-modal');
+        const confirmBtn = document.getElementById('confirm-download');
+
+        // Check if the prompt has been shown before in localStorage
+        if (!localStorage.getItem('tasktube_app_prompt_shown')) {
+            // Slight delay before popping up for better user experience
+            setTimeout(() => {
+                modal.classList.add('show-modal');
+            }, 2000);
+        }
+
+        function dismissModal() {
+            modal.classList.remove('show-modal');
+            // Save to localStorage so it won't pop up again
+            localStorage.setItem('tasktube_app_prompt_shown', 'true');
+        }
+
+        closeBtn.addEventListener('click', dismissModal);
+        confirmBtn.addEventListener('click', dismissModal);
+        
+        // Also close if user clicks outside the modal content box
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                dismissModal();
+            }
+        });
+    });
+
     // Notification Logic
     const notificationQueue = [];
     let isNotificationShowing = false;
@@ -180,7 +308,6 @@
     ];
 
     function showNotification(message) {
-        const notificationPopup = document.getElementById("notification-popup");
         const messageElement = document.getElementById("notification-message");
         messageElement.textContent = message;
 
