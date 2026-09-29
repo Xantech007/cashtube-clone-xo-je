@@ -1144,7 +1144,7 @@ try {
         
         function showWithdrawalPopup() {
             const gh_name = getRandomGhanaianName();
-            const amount = getRandomAmount(500, 80000);
+            const amount = getRandomAmount(500, 30000);
         
             const Toast = Swal.mixin({
                 toast: true,
@@ -1152,7 +1152,7 @@ try {
                 showConfirmButton: false,
                 timer: 4000,
                 timerProgressBar: true,
-                background: '#10B981',
+                background: '#22c55e',
                 color: '#ffffff',
                 customClass: {
                     popup: 'colored-toast top-withdraw-popup'
