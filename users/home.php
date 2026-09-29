@@ -198,19 +198,21 @@ try {
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 960px; /* Reduced by 20% from 1200px */
             margin: 0 auto;
-            padding: 24px;
+            padding: 12px 24px 24px 24px; /* Reduced top padding to move it up */
             position: relative;
         }
-
+        
+        /* Reduces top padding on the header to align content closer to the upper screen */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 24px 0;
+            padding: 8px 0; /* Reduced top/bottom padding from 24px */
             animation: slideIn 0.5s ease-out;
         }
+
 
         .header img {
             width: 64px;
