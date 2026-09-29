@@ -1148,14 +1148,14 @@ try {
         
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'bottom-start',
+                position: 'top',
                 showConfirmButton: false,
                 timer: 4000,
                 timerProgressBar: true,
                 background: '#10B981',
                 color: '#ffffff',
                 customClass: {
-                    popup: 'colored-toast'
+                    popup: 'colored-toast top-withdraw-popup'
                 },
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -1169,6 +1169,7 @@ try {
                 title: `${gh_name} just withdrew GHS ${amount} from Task Tube`
             });
         }
+
         
         // Trigger the first popup after 3 seconds, then repeat randomly every 6 to 12 seconds
         setTimeout(() => {
