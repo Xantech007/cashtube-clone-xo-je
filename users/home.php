@@ -1113,6 +1113,70 @@ try {
         document.addEventListener('contextmenu', function(event) {
             event.preventDefault();
         });
+        
+        // --- Live Withdrawal Popups ---
+        const ghanaianNames = [
+            "Kwame Mensah", "Kofi Amoah", "Yaw Osei", "Kwaku Addo", "Kwabena Boateng",
+            "Kwadwo Owusu", "Abena Appiah", "Akua Donkor", "Yaa Asantewaa", "Afia Pokua",
+            "Esi Koomson", "Ama Serwaa", "Kojo Antwi", "Akwasi Frimpong", "Adwoa Mansa",
+            "Akosua Agyapong", "Fiifi Baidoo", "Kobi Quaye", "Nii Armah", "Naa Densua",
+            "Nii Laryea", "Naa Shormey", "Ataa Adjetey", "Dede Ayitey", "Sena Agbesi",
+            "Elenam Fiagbedzi", "Kofi Dogbe", "Akpene Gbedemah", "Abla Mawutor", "Komi Tsikata",
+            "Mawuli Agbedor", "Selorm Dzabu", "Edem Kpodo", "Fafa Nukunya", "Dela Amegashie",
+            "Abdul-Rahman Issah", "Musa Sulemana", "Aminu Yakubu", "Fatima Alhassan", "Zainab Ibrahim",
+            "Kassim Fuseini", "Rashid Salifu", "Suaad Adam", "Inusah Gariba", "Hadiza Bawa",
+            "Joseph Acheampong", "Emmanuel Turkson", "Grace Boadu", "Patience Dankwa", "Samuel Quansah",
+            "Daniel Badu", "Priscilla Ankomah", "Benjamin Kyei", "Ebenezer Ofori", "Mercy Gyasi"
+        ];
+        
+        function getRandomGhanaianName() {
+            const index = Math.floor(Math.random() * ghanaianNames.length);
+            return ghanaianNames[index];
+        }
+        
+        function getRandomAmount(min, max) {
+            // Generates a random amount between min and max rounded to two decimal places
+            const amount = (Math.random() * (max - min) + min).toFixed(2);
+            return parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        }
+        
+        function showWithdrawalPopup() {
+            const gh_name = getRandomGhanaianName();
+            const amount = getRandomAmount(500, 80000);
+        
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981',
+                color: '#ffffff',
+                customClass: {
+                    popup: 'colored-toast'
+                },
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+        
+            Toast.fire({
+                icon: 'success',
+                iconColor: '#ffffff',
+                title: `${gh_name} just withdrew GHS ${amount} from Task Tube`
+            });
+        }
+        
+        // Trigger the first popup after 3 seconds, then repeat randomly every 6 to 12 seconds
+        setTimeout(() => {
+            showWithdrawalPopup();
+            setInterval(() => {
+                showWithdrawalPopup();
+            }, Math.floor(Math.random() * 6000) + 6000);
+        }, 3000);
+        
+        
     </script>
 </body>
 </html>
