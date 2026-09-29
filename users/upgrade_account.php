@@ -568,10 +568,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="file" id="proof_file" name="proof_file" accept=".jpg,.jpeg,.png" required placeholder=" ">
                         <label for="proof_file">Upload Payment Receipt</label>
                     </div>
+
+                    <!-- Warnings section -->
+                    <div class="anim d5" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; text-align: left;">
+                      <div style="color: #f87171; font-size: 18px; flex-shrink: 0;"><i class="fa-solid fa-shield-halved"></i></div>
+                      <div style="font-size: 13px; color: #f87171; line-height: 1.5; font-weight: 500;">
+                        <b style="color: #ef4444; font-weight: 700;">Warning:</b> Only upload your genuine payment receipt. Uploading fake, edited, or unrelated images will result in <b style="color: #ef4444; font-weight: 700;">immediate account suspension.</b>
+                      </div>
+                    </div>
+
                     <button type="submit" class="submit-btn">
                         <?php echo ($upgrade_status === 'pending') ? 'Resubmit Upgrade Request' : 'Submit Upgrade Request'; ?>
                     </button>
                 </form>
+
 
                 <p style="text-align: center; margin-top: 20px;"><a href="home.php">Return to Dashboard</a></p>
             <?php endif; ?>
