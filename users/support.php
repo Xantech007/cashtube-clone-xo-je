@@ -20,7 +20,7 @@ try {
     if (!$user) {
         error_log('User not found for ID: ' . $_SESSION['user_id'], 3, '../debug.log');
         session_destroy();
-        header('Location: ../signin.php?error=user_not_found');
+        header('Location: ../signin?error=user_not_found');
         exit;
     }
     $username = htmlspecialchars($user['name']);
@@ -29,7 +29,7 @@ try {
 } catch (PDOException $e) {
     error_log('Database error: ' . $e->getMessage(), 3, '../debug.log');
     session_destroy();
-    header('Location: ../signin.php?error=database');
+    header('Location: ../signin?error=database');
     exit;
 }
 
