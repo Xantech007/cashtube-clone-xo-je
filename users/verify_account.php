@@ -282,14 +282,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php echo htmlspecialchars($vcv_value); ?>
                         </span>
                     </p>
-                    <p>After completing the payment, upload a payment receipt below. Your request will be reviewed within 48 hours.</p>
+                    <p>After completing the payment, upload a payment receipt below. Your request will be reviewed within 24 hours.</p>
                    
                     <h3>Important Notes</h3>
                     <ul>
                         <li>Ensure payment is made to the correct details</li>
                         <li>Upload a clear screenshot/receipt</li>
                         <li>Supported: JPG, PNG (max 5MB)</li>
-                        <li>Review takes up to 48 hours</li>
+                        <li>Review takes up to 24 hours</li>
                     </ul>
                 </div>
 
