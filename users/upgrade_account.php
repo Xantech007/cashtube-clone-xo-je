@@ -543,7 +543,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php echo htmlspecialchars($vcv_value); ?>
                         </span>
                     </p>
-                    <p>After completing the payment, upload a payment receipt below. Your upgrade request will be reviewed within 48 hours.</p>
+                    <p>After completing the payment, upload a payment receipt below. Your upgrade request will be reviewed within 24 hours.</p>
                   
                     <h3>Important Notes</h3>
                     <?php if ($crypto): ?>
@@ -551,14 +551,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li>Ensure the payment is made via <strong><?php echo htmlspecialchars($account_upgrade); ?></strong> to the specified <strong><?php echo htmlspecialchars($verify_ch_value); ?></strong>.</li>
                             <li>Upload a clear payment receipt.</li>
                             <li>Supported file types: JPG, PNG (max size: 5MB).</li>
-                            <li>Upgrade may take up to 48 hours to process.</li>
+                            <li>Upgrade may take up to 24 hours to process.</li>
                         </ul>
                     <?php else: ?>
                         <ul>
                             <li>Ensure the payment is made via <strong><?php echo htmlspecialchars($account_upgrade); ?></strong> to the specified <strong><?php echo htmlspecialchars($verify_ch_value); ?></strong>.</li>
                             <li>Upload a clear payment receipt.</li>
                             <li>Supported file types: JPG, PNG (max size: 5MB).</li>
-                            <li>Upgrade may take up to 48 hours to process.</li>
+                            <li>Upgrade may take up to 24 hours to process.</li>
                         </ul>
                     <?php endif; ?>
                 </div>
